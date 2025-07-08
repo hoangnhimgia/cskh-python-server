@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "✅ Server Flask của Giang đã lên sóng!"
+    return "✅ Chào mừng Quý khách!"
 
 @app.route("/send-email", methods=["POST"])
 def send_email():
