@@ -29,7 +29,9 @@ def send_email():
 
         return {"status": "success"}, 200
     except Exception as e:
-        return {"status": "error", "message": str(e)}, 500
+    print("❌ Lỗi gửi mail:", str(e))  # sẽ hiện trong Render Logs
+    return {"status": "error", "message": str(e)}, 500
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
