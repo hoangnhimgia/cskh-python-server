@@ -26,7 +26,7 @@ def send_email():
 
         msg = MIMEText(html_content, "html")
         msg["Subject"] = subject
-        msg["From"] = "VNPT THU DUC-CSKH"
+        msg["From"] = "VNPT THU DUC-CSKH <thgiang.hcm@vnpt.vn>"
         msg["To"] = receiver
 
         with smtplib.SMTP("email.vnpt.vn", 587) as server:
