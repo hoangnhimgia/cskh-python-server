@@ -26,7 +26,7 @@ def send_email():
 
         msg = MIMEText(html_content, "html")
         msg["Subject"] = subject
-        from_name = data.get("from_name", "VNPT TPHCM - CSKH")
+        from_name = data.get("from_name", "VNPT THU DUC - CSKH")
         msg["From"] = f"{from_name} <thgiang.hcm@vnpt.vn>"
         msg["To"] = receiver
 
