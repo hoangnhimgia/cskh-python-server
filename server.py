@@ -33,7 +33,7 @@ def send_email():
         # Tạo email
         msg = MIMEText(html_content, "html")
         msg["Subject"] = subject
-        msg["From"] = f"{from_name} <thgiang.hcm@vnpt.vn>"
+        msg["From"] = f"{from_name} <diepttb.hcm@vnpt.vn>"
         msg["To"] = receiver
 
         # Xử lý Cc nếu có
@@ -45,9 +45,9 @@ def send_email():
         # Gửi email
         with smtplib.SMTP("email.vnpt.vn", 587) as server:
             server.starttls()
-            server.login("thgiang.hcm@vnpt.vn", email_password)
+            server.login("diepttb.hcm@vnpt.vn", email_password)
             server.sendmail(
-                "thgiang.hcm@vnpt.vn",
+                "diepttb.hcm@vnpt.vn",
                 [receiver] + cc_list,
                 msg.as_string()
             )
