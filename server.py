@@ -15,6 +15,7 @@ def send_email():
     try:
         data = request.json
         receiver = data.get("to")
+        cc = data.get("cc")  # ✅ nhận danh sách Cc từ client
         subject = data.get("subject")
         html_content = data.get("htmlBody")
         from_name = data.get("from_name", "VNPT THU DUC - CSKH")
@@ -35,17 +36,28 @@ def send_email():
         msg["From"] = f"{from_name} <thgiang.hcm@vnpt.vn>"
         msg["To"] = receiver
 
+        # Xử lý Cc nếu có
+        cc_list = []
+        if cc:
+            msg["Cc"] = cc
+            cc_list = [email.strip() for email in cc.split(",") if "@" in email]
+
         # Gửi email
         with smtplib.SMTP("email.vnpt.vn", 587) as server:
             server.starttls()
             server.login("thgiang.hcm@vnpt.vn", email_password)
-            server.sendmail("thgiang.hcm@vnpt.vn", receiver, msg.as_string())
+            server.sendmail(
+                "thgiang.hcm@vnpt.vn",
+                [receiver] + cc_list,
+                msg.as_string()
+            )
 
         # Ghi log gửi
         print(f"✅ {datetime.now()} - Đã gửi đến {receiver} | Tiêu đề: {subject}")
         return {
             "status": "success",
             "receiver": receiver,
+            "cc": cc_list,
             "subject": subject,
             "from": msg["From"]
         }, 200
